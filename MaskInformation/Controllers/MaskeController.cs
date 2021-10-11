@@ -22,13 +22,19 @@ namespace MaskInformation.Controllers
         public ActionResult MaskInformation(String barkod)
         {
             var maske = _appRepository.GetMaske(barkod);
-            return Ok(maske);
+            if (maske != null)
+                return Ok(maske);
+            else
+                return NotFound("Aranan barkod bulunamadı.");
         }
         [Route("findall")]
         public ActionResult MaskFindall() 
         {
             var maskelist = _appRepository.masklist();
-            return Ok(maskelist);
+            if (maskelist != null)
+                return Ok(maskelist);
+            else
+                return NotFound("Barkod bulunamadı.");
         }
     }
 }
